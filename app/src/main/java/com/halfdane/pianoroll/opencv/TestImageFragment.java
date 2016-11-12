@@ -1,4 +1,4 @@
-package com.halfdane.pianoroll;
+package com.halfdane.pianoroll.opencv;
 
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.halfdane.pianoroll.R;
 import com.halfdane.pianoroll.util.OpenCvInit;
 
 import org.opencv.android.Utils;
@@ -70,7 +71,7 @@ public class TestImageFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_test_image, container, false);
+        return inflater.inflate(R.layout.fragment_opencv_test_image, container, false);
     }
 
     private void displayIn(Mat m, int imageViewId) {

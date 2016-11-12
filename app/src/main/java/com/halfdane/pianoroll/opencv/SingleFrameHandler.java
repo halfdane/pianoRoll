@@ -1,4 +1,4 @@
-package com.halfdane.pianoroll;
+package com.halfdane.pianoroll.opencv;
 
 import org.opencv.core.Core;
 import org.opencv.core.Mat;
@@ -33,11 +33,8 @@ public class SingleFrameHandler {
         cvtColor(output, output, Imgproc.COLOR_BGR2GRAY);
 
         equalizeHist(output, output);
-        GaussianBlur(output, output, new Size(7, 7), 0, 0);
+        GaussianBlur(output, output, new Size(5, 5), 0, 0);
         Canny(output, output, 100, 200);
-
-        MatOfPoint corners = new MatOfPoint();
-        Imgproc.goodFeaturesToTrack(output, corners, 30, 0.01, 100);
 
         List<MatOfPoint> contours = new ArrayList<>();
         Mat hierarchy = new Mat();
@@ -45,19 +42,18 @@ public class SingleFrameHandler {
 
         output = inputFrame.clone();
 
-        for( int i = 0; i< contours.size(); i++ ) {
-            Scalar color = new Scalar(random.nextInt(255), random.nextInt(255), random.nextInt(255));
-            drawContours(output, contours, i, color, 2, 8, hierarchy, 0, new Point());
-        }
-        //displayContours(output, contours);
+        //for( int i = 0; i< contours.size(); i++ ) {
+        //    Scalar color = new Scalar(random.nextInt(255), random.nextInt(255), random.nextInt(255));
+        //    drawContours(output, contours, i, color, 5, 8, hierarchy, 0, new Point());
+        //}
 
-        return output;
-    }
-
-    private void displayContours(Mat output, List<MatOfPoint> contours) {
         for (MatOfPoint contour : contours) {
             Rect rect = boundingRect(contour);
+
+
             rectangle(output, new Point(rect.x, rect.y), new Point(rect.x + rect.width, rect.y + rect.height), new Scalar(0, 0, 255));
         }
+
+        return output;
     }
 }

@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.halfdane.pianoroll.opencv.SingleFrameHandler;
 import com.halfdane.pianoroll.util.OpenCvInit;
 
 import org.opencv.android.CameraBridgeViewBase;
@@ -39,7 +40,7 @@ public class LiveCameraFragment extends Fragment implements CameraBridgeViewBase
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_live_camera, container, false);
+        return inflater.inflate(R.layout.fragment_opencv_live_camera, container, false);
     }
 
     @Override
