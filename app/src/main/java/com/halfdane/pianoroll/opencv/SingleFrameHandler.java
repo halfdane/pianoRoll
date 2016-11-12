@@ -25,6 +25,7 @@ import static org.opencv.imgproc.Imgproc.drawContours;
 import static org.opencv.imgproc.Imgproc.equalizeHist;
 import static org.opencv.imgproc.Imgproc.findContours;
 import static org.opencv.imgproc.Imgproc.rectangle;
+import static org.opencv.imgproc.Imgproc.threshold;
 
 public class SingleFrameHandler {
 
@@ -37,13 +38,14 @@ public class SingleFrameHandler {
 
         equalizeHist(output, output);
         GaussianBlur(output, output, new Size(5, 5), 0, 0);
+        threshold(output, output, 50, 255, Imgproc.THRESH_BINARY);
         Canny(output, output, 100, 200);
 
         List<MatOfPoint> contours = new ArrayList<>();
         Mat hierarchy = new Mat();
         findContours(output, contours, hierarchy, Imgproc.RETR_TREE, Imgproc.CHAIN_APPROX_SIMPLE);
 
-        output = inputFrame.clone();
+        //output = inputFrame.clone();
 
         //for( int i = 0; i< contours.size(); i++ ) {
         //    Scalar color = new Scalar(random.nextInt(255), random.nextInt(255), random.nextInt(255));
@@ -65,8 +67,10 @@ public class SingleFrameHandler {
             }
         });
 
-        show(output, boundingRects.get(0));
-        show(output, boundingRects.get(1));
+        if (boundingRects.size() >= 1)
+            show(output, boundingRects.get(0));
+        if (boundingRects.size() >= 1)
+            show(output, boundingRects.get(1));
 
         return output;
     }
