@@ -10,6 +10,9 @@ import org.opencv.core.Size;
 import org.opencv.imgproc.Imgproc;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Random;
 
@@ -47,13 +50,28 @@ public class SingleFrameHandler {
         //    drawContours(output, contours, i, color, 5, 8, hierarchy, 0, new Point());
         //}
 
+        ArrayList<Rect> boundingRects = new ArrayList<>();
         for (MatOfPoint contour : contours) {
+            boundingRects.add(boundingRect(contour));
             Rect rect = boundingRect(contour);
 
-
-            rectangle(output, new Point(rect.x, rect.y), new Point(rect.x + rect.width, rect.y + rect.height), new Scalar(0, 0, 255));
+            //show(output, rect);
         }
 
+        Collections.sort(boundingRects, new Comparator<Rect>() {
+            @Override
+            public int compare(Rect rect1, Rect rect2) {
+                return rect2.height - rect1.height;
+            }
+        });
+
+        show(output, boundingRects.get(0));
+        show(output, boundingRects.get(1));
+
         return output;
+    }
+
+    private void show(Mat output, Rect rect) {
+        rectangle(output, new Point(rect.x, rect.y), new Point(rect.x + rect.width, rect.y + rect.height), new Scalar(0, 0, 255), 5);
     }
 }
