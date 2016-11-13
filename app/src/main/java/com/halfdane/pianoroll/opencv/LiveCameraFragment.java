@@ -1,4 +1,4 @@
-package com.halfdane.pianoroll;
+package com.halfdane.pianoroll.opencv;
 
 import android.content.pm.PackageManager;
 import android.hardware.Camera;
@@ -9,7 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.halfdane.pianoroll.opencv.SingleFrameHandler;
+import com.halfdane.pianoroll.R;
 import com.halfdane.pianoroll.util.OpenCvInit;
 
 import org.opencv.android.CameraBridgeViewBase;

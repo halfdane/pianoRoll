@@ -1,5 +1,6 @@
-package com.halfdane.pianoroll.opencv;
+package com.halfdane.pianoroll;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
@@ -11,14 +12,20 @@ import android.os.Bundle;
 
 import android.view.WindowManager;
 
-import com.halfdane.pianoroll.LiveCameraFragment;
 import com.halfdane.pianoroll.R;
+import com.halfdane.pianoroll.boofcv.BoofCvLiveCameraActivity;
+import com.halfdane.pianoroll.opencv.LiveCameraFragment;
+import com.halfdane.pianoroll.opencv.TestImageFragment;
 
 public class TabsActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Intent intent = new Intent(this, BoofCvLiveCameraActivity.class);
+        startActivity(intent);
+
 
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
